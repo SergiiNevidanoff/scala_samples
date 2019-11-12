@@ -1,13 +1,16 @@
 object CatOMatique extends App {
 
-  case class Cat(val name: String, val colour: String, val food: String)
-
   val oswald = Cat(name = "Oswald", colour = "Milk", food = "Milk")
   val henderson = Cat(name = "Oswald", colour = "Chips", food = "Ginger")
   val quentin = Cat(name = "Quentin", colour = "Tabby and white", food = "Curry")
 
-  object ChipShop{
-    def willServe(cat:Cat): Boolean = cat.food == "Chips"
+  case class Cat(val name: String, val colour: String, val food: String)
+
+  object ChipShop {
+    def willServe(cat: Cat): Boolean = cat match {
+      case Cat(_, _, "Chips") => true
+      case _ => false
+    }
   }
 
   object Cat1 {

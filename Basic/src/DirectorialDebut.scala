@@ -20,22 +20,17 @@ object DirectorialDebut extends App {
   case class Director(firstName: String, lastName: String, yearOfBirth: Int) {
     val fullName = s"${firstName} ${lastName}"
 
-    def copy(firstName: String = this.firstName,
-             lastName: String = this.lastName,
-             yearOfBirth: Int = this.yearOfBirth
-            ) = Director(firstName, lastName, yearOfBirth)
+    def older(otherDirector: Director): Director = if (yearOfBirth > otherDirector.yearOfBirth) this else otherDirector
   }
 
   case class Film(name: String, yearOfRelease: Int, imdbRating: Double, director: Director) {
     val directorAge: Int = yearOfRelease - director.yearOfBirth
 
-    def copy(
-              name: String = this.name,
-              yearOfRelease: Int = this.yearOfRelease,
-              imdbRating: Double = this.imdbRating,
-              director: Director = this.director.copy()): Film = Film(name, yearOfRelease, imdbRating, director)
+    def isDirectedBy(anotherDirector: Director): Boolean = director == anotherDirector
 
-    def isDirectedBy(director: Director): Boolean = ???
+    def higherRating(otherFilm: Film): Film = if (imdbRating > otherFilm.imdbRating) this else otherFilm
+
+    def oldestDirectorAtTheTime(otherFilm: Film): Director = if (this.director.yearOfBirth > otherFilm.director.yearOfBirth) this.director else otherFilm.director
   }
 
 }
