@@ -4,7 +4,25 @@ object CatOMatique extends App {
   val henderson = Cat(name = "Oswald", colour = "Chips", food = "Ginger")
   val quentin = Cat(name = "Quentin", colour = "Tabby and white", food = "Curry")
 
-  case class Cat(val name: String, val colour: String, val food: String)
+  trait Feline {
+    def colour: String
+
+    def sound: String
+  }
+
+  trait BigCat extends Feline {
+    override val sound = "roar"
+  }
+
+  case class Cat(name: String, colour: String, food: String) extends Feline {
+    override val sound: String = "meow"
+  }
+
+  case class Tiger(colour: String) extends BigCat
+
+  case class Lion(colour: String, maneSize: Int) extends BigCat
+
+  case class Panther(colour: String) extends BigCat
 
   object ChipShop {
     def willServe(cat: Cat): Boolean = cat match {
@@ -13,22 +31,5 @@ object CatOMatique extends App {
     }
   }
 
-  object Cat1 {
-    val name = "Oswald"
-    val colour = "Black"
-    val food = "Milk"
-  }
-
-  object Cat2 {
-    val name = "Henderson"
-    val colour = "Ginger"
-    val food = "Chips"
-  }
-
-  object Cat3 {
-    val name = "Quentin"
-    val colour = "Tabby and white"
-    val food = "Curry"
-  }
 
 }

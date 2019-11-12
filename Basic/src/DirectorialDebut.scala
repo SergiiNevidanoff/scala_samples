@@ -33,4 +33,12 @@ object DirectorialDebut extends App {
     def oldestDirectorAtTheTime(otherFilm: Film): Director = if (this.director.yearOfBirth > otherFilm.director.yearOfBirth) this.director else otherFilm.director
   }
 
+  object DadsRating{
+    def rate(film:Film): Double = film match {
+      case Film(_,_,_, Director("Christopher", "Nolan", _)) => 7.0
+      case Film(_,_,_, Director("Clint", "Eastwood", _)) => 10.0
+      case _ => 3.0
+    }
+  }
+
 }
