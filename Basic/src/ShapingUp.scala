@@ -23,11 +23,11 @@ object ShapingUp extends App {
   }
 
   sealed trait Color {
-    def red: ColorIntensity.Value
+    def red: Int = 0
 
-    def green: ColorIntensity.Value
+    def green: Int = 0
 
-    def blue: ColorIntensity.Value
+    def blue: Int = 0
   }
 
   case class Circle(radius: Int) extends Shape {
@@ -47,11 +47,21 @@ object ShapingUp extends App {
   }
 
   object Yellow extends Color {
-    override def red: ColorIntensity.Value = ColorIntensity.Light
+    override def red: Int = 255
 
-    override def green: ColorIntensity.Value = ColorIntensity.Light
+    override def green: Int = 255
+  }
 
-    override def blue: ColorIntensity.Value = ColorIntensity.Dark
+  object Red extends Color {
+    override def red: Int = 255
+  }
+
+  object Pink extends Color {
+    override def red: Int = 255
+
+    override def green: Int = 192
+
+    override def blue: Int = 203
   }
 
   object ColorIntensity extends Enumeration {
@@ -65,8 +75,11 @@ object ShapingUp extends App {
       case Square(side) => s"A ${colorName(color)} square with each side of $side cm"
     }
 
-    private def colorName(color: Color) = {
-      color.getClass.getName
+    private def colorName(color: Color) = color match {
+      case Red => "red"
+      case Yellow => "yellow"
+      case Pink => "pink"
+      case _ => "Unknown"
     }
   }
 
